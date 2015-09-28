@@ -23,8 +23,6 @@ exit 0
 # Validate packages
 checksumPackages() {
   echo "Checking if required packages are present and valid..."
-  echo "CHECKSUM.$DISTRIBUITION...."
-  echo Checksum.$DISTRIBUTION
   md5sum -c Checksum.$DISTRIBUTION
   if [ "$?" -ne 0 ]; then
     echo "MD5 for required packages to build this image did not match!"
