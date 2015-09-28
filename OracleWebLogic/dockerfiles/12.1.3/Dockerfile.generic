@@ -32,17 +32,18 @@
 #
 # Pull base image
 # ---------------
-FROM oraclelinux:7
+FROM oraclejava:8
 
 # Maintainer
 # ----------
-MAINTAINER Bruno Borges <bruno.borges@oracle.com>
+MAINTAINER Luciano Callero <lucianocallero@gmail.com>
 
 # Environment variables required for this build (do NOT change)
 # -------------------------------------------------------------
-ENV JAVA_RPM jdk-7u79-linux-x64.rpm
+
+#ENV JAVA_RPM jdk-7u79-linux-x64.rpm
 ENV WLS_PKG fmw_12.1.3.0.0_wls.jar
-ENV JAVA_HOME /usr/java/default
+#ENV JAVA_HOME /usr/java/default
 ENV CONFIG_JVM_ARGS -Djava.security.egd=file:/dev/./urandom
 
 # Setup required packages (unzip), filesystem, and oracle user
@@ -53,13 +54,13 @@ RUN mkdir /u01 && \
 
 # Copy packages
 COPY $WLS_PKG /u01/
-COPY $JAVA_RPM /u01/
+#COPY $JAVA_RPM /u01/
 COPY install.file /u01/
 COPY oraInst.loc /u01/
 
 # Install and configure Oracle JDK 8u25
 # -------------------------------------
-RUN rpm -i /u01/$JAVA_RPM && \ 
+#RUN rpm -i /u01/$JAVA_RPM && \ 
     rm /u01/$JAVA_RPM
 
 # Change the open file limits in /etc/security/limits.conf
