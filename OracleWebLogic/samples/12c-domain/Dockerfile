@@ -1,3 +1,4 @@
+## -*- docker-image-name: "myweblogic" -*-
 # LICENSE CDDL 1.0 + GPL 2.0
 #
 # ORACLE DOCKERFILES PROJECT
@@ -54,7 +55,6 @@ RUN /u01/oracle/weblogic/wlserver/common/bin/wlst.sh -skipWLSModuleScanning /u01
     echo ". /u01/oracle/weblogic/user_projects/domains/base_domain/bin/setDomainEnv.sh" >> /u01/oracle/.bashrc && \ 
     echo "export PATH=$PATH:/u01/oracle/weblogic/wlserver/common/bin:/u01/oracle/weblogic/user_projects/domains/base_domain/bin" >> /u01/oracle/.bashrc && \
     rm /u01/oracle/create-wls-domain.py /u01/oracle/jaxrs2-template.jar 
-
 # Expose Node Manager default port, and also default http/https ports for admin console
 EXPOSE $NM_PORT $ADMIN_PORT $MS_PORT
 
@@ -62,6 +62,8 @@ EXPOSE $NM_PORT $ADMIN_PORT $MS_PORT
 WORKDIR /u01/oracle
 
 ENV PATH $PATH:/u01/oracle/weblogic/wlserver/common/bin:/u01/oracle/weblogic/user_projects/domains/base_domain/bin:/u01/oracle
+
+RUN /u01/oracle/deployer.sh
 
 # Define default command to start bash. 
 CMD ["startWebLogic.sh"]
